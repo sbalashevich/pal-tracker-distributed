@@ -46,6 +46,16 @@ public class AllocationController {
             .collect(toList());
     }
 
+    @GetMapping("/sleep")
+    public String getWithPause(){
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "Sleep 200";
+    }
+
 
     private boolean projectIsActive(long projectId) {
         ProjectInfo project = client.getProject(projectId);
