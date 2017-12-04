@@ -26,6 +26,8 @@ public class App {
         RestOperations restOperations,
         @Value("${registration.server.endpoint}") String registrationEndpoint
     ) {
+        System.out.println("!!!!!!!!!!!!!!!!!!  registration service: " + registrationEndpoint);
+        registrationEndpoint = "http://registration-server";
         return new ProjectClient(restOperations, registrationEndpoint);
     }
 }
