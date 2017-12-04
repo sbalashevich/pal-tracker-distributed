@@ -3,6 +3,7 @@ package io.pivotal.pal.tracker.allocations;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,6 +14,7 @@ import java.util.TimeZone;
 
 @SpringBootApplication
 @EnableEurekaClient
+@EnableCircuitBreaker
 @ComponentScan({"io.pivotal.pal.tracker.allocations", "io.pivotal.pal.tracker.restsupport"})
 public class App {
 
@@ -26,8 +28,6 @@ public class App {
         RestOperations restOperations,
         @Value("${registration.server.endpoint}") String registrationEndpoint
     ) {
-        System.out.println("!!!!!!!!!!!!!!!!!!  registration service: " + registrationEndpoint);
-        registrationEndpoint = "http://registration-server";
         return new ProjectClient(restOperations, registrationEndpoint);
     }
 }
